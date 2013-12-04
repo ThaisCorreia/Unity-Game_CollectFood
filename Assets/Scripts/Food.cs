@@ -16,9 +16,4 @@ public class Food : MonoBehaviour {
 		transform.Rotate(rotation * Time.deltaTime);
 		
 	}
-	
-	void OnCollisionEnter(Collision collision){
-		Debug.Log("Coletou!");
-		//Destroy(gameObject);
-	}
 }

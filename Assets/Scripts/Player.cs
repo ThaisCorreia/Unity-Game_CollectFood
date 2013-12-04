@@ -6,6 +6,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 	
 	protected CharacterController player;
+	protected GameManager manager;
 	
 	public float moveSpeed = 3f;
 	protected float rotationSpeed = 90f;
@@ -22,8 +23,7 @@ public class Player : MonoBehaviour {
 	void Start () {
 		
 		player = GetComponent<CharacterController>();
-		
-		player.renderer.enabled = false;
+		manager = GameObject.Find("Level").GetComponent<GameManager>();
 		
 		if(!player)
 		{
@@ -54,5 +54,18 @@ public class Player : MonoBehaviour {
 		
 		player.SimpleMove(move * moveSpeed);
 	
+	}
+	
+	void OnControllerColliderHit(ControllerColliderHit c){
+		string name = c.transform.name;
+		if(name.Contains("Food")){
+			manager.CollectFood(c.gameObject);
+		}
+	}
+	
+	public void SetPosition(Vector3 position){
+		
+		transform.position = position;
+		
 	}
 }

@@ -3,7 +3,9 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	string[] foodObjects = new string[]{"Food1", "Food2", "Food3"};
+	public Player player;
+	
+	string[] foodObjects;
 	
 	public static int foodQty;
 	
@@ -22,7 +24,13 @@ public class GameManager : MonoBehaviour {
 	
 	public float radiusFood;
 	
+	public Vector3 initialPosition;
+	
 	public void Start () {
+		
+		initialPosition = new Vector3(7.5f,0.73f,-8.9f);
+		
+		player.SetPosition(initialPosition);
 		
 		gameOver = false;
 		
@@ -36,12 +44,15 @@ public class GameManager : MonoBehaviour {
 		radiusFood = 0.5f;
 		counter = 0f;
 		
+		foodObjects = new string[]{"FoodApple","FoodBanana","FoodCandyCane"};
+		
 		CreateFoodObjects(foodQty);
 		
 	}
 	
 	public void Update () {
 		
+		if(counter == foodQty) gameOver = true;
 		if(!gameOver){ 
 			
 			if(Mathf.Round(seconds) <= 9) GameObject.Find("Timer").guiText.text = minutes + ":0" + seconds.ToString("0");
@@ -58,10 +69,15 @@ public class GameManager : MonoBehaviour {
 			else{
 				seconds -= Time.deltaTime;
 			}
-			
-			GameObject.Find("Counter").guiText.text = counter + "/" + foodQty;
 
 		}
+		else{
+			
+			
+			
+		}
+		
+		GameObject.Find("Counter").guiText.text = counter + "/" + foodQty;
 	
 	}
 	
@@ -75,7 +91,6 @@ public class GameManager : MonoBehaviour {
 			Quaternion rotation = new Quaternion(0f, 0f, 0f, 0f);
 			
 			Instantiate(Resources.Load(foodObjects[type]), position, rotation);
-			Debug.Log(Resources.Load(foodObjects[type]));
 			
 		}
 		
@@ -89,6 +104,13 @@ public class GameManager : MonoBehaviour {
 			return calculatePosition();
 		}
 		return position;
+		
+	}
+	
+	public void CollectFood(GameObject c){
+		
+		Destroy(c);
+		counter+=1;
 		
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Fan : MonoBehaviour {
 	
+	public AudioClip audio;
 	private Vector3 rotation;
 	private float speed;
 
@@ -10,7 +11,7 @@ public class Fan : MonoBehaviour {
 	
 		rotation = new Vector3(0f,0f,90f);
 		speed = 10f;
-		
+		transform.audio.PlayOneShot(audio);
 	}
 	
 	void Update () {

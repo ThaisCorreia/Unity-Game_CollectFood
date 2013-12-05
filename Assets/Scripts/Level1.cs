@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Level01 : GameManager {
+public class Level1 : GameManager {
 
 	void Start () {
 	
-		foodQty = 5;
+		foodQty = 1;
 		seconds = 0f;
-		minutes = 2f;
+		minutes = 1f;
 		
 		base.Start();
 		

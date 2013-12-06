@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
 		xLimit1 = -10.8f;
 		xLimit2 = 8f;
 		yLimit1 = 0.3f;
-		yLimit2 = 1.8f;
+		yLimit2 = 4f;
 		zLimit1 = -9.5f;
 		zLimit2 = 9.5f;
 		

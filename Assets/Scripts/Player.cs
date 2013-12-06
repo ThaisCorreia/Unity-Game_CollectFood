@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
 	public GameManager manager;
 	
 	public float moveSpeed = 3f;
-	protected float rotationSpeed = 90f;
+	protected float rotationSpeed = 70f;
 	public float jumpSpeed;
 	
 	protected Vector3 move = Vector3.zero;
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
 			enabled = false;
 		}
 		
-		jumpSpeed = 3f;
+		jumpSpeed = 4f;
 	
 	}
 	

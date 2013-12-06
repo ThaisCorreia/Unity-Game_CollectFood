@@ -24,8 +24,6 @@ public class Food : MonoBehaviour {
 		
 			manager = c.gameObject.GetComponent<Player>().manager;
 			
-			Debug.Log("Manager: " + manager);
-			
 			if(gameObject != null && manager != null){
 				
 				string name = c.transform.name;

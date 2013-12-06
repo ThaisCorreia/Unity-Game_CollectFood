@@ -5,9 +5,9 @@ public class Level3 : GameManager {
 
 	void Start () {
 	
-		foodQty = 3;
+		foodQty = 30;
 		seconds = 0f;
-		minutes = 1f;
+		minutes = 8f;
 		
 		base.Start();
 		

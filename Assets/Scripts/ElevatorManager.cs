@@ -155,7 +155,7 @@ public class ElevatorManager : MonoBehaviour {
 			newPosition.z = body.position.z;
 			body.position = newPosition;
 			if(playerInside){
-				playerPosition.y = newPosition.y + Time.deltaTime  + 0.3808894f;
+				playerPosition.y = body.position.y + Time.deltaTime * speed + 0.3808894f + 0.2f;
 				playerPosition.x = player.transform.position.x;
 				playerPosition.z = player.transform.position.z;
 				player.transform.position = playerPosition;

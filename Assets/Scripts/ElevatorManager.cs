@@ -12,7 +12,6 @@ public class ElevatorManager : MonoBehaviour {
 	private bool exit;
 	private bool doorIsClosed;
 	private bool going;
-	public bool playerInside;
 	
 	private string button;
 	
@@ -146,28 +145,28 @@ public class ElevatorManager : MonoBehaviour {
 		if(targetPosition == floor1Location.y && body.position.y >= floor2Location.y){
 			body.position = floor2Location;
 			moveElevator = false;
+			player.transform.parent = null;
 		}
 		else if(targetPosition == floor2Location.y && body.position.y <= floor1Location.y){
 			body.position = floor1Location;
 			moveElevator = false;
+			player.transform.parent = null;
 		}
 		else{
+			
+			player.transform.parent = body.transform;
+			
 			Vector3 newPosition = new Vector3();
 			Vector3 playerPosition = new Vector3();
 			
 			if(targetPosition == floor1Location.y){
+				
 				newPosition.y = body.position.y + Time.deltaTime * speed;
 			}
-			else newPosition.y = body.position.y - Time.deltaTime * speed;
+			else{ newPosition.y = body.position.y - Time.deltaTime * speed;}
 			newPosition.x = body.position.x;
 			newPosition.z = body.position.z;
 			body.position = newPosition;
-			if(playerInside){
-				playerPosition.y = body.position.y + Time.deltaTime * speed + 0.3808894f + 0.2f;
-				playerPosition.x = player.transform.position.x;
-				playerPosition.z = player.transform.position.z;
-				player.transform.position = playerPosition;
-			}
 		}
 		
 	}

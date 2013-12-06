@@ -24,19 +24,12 @@ public class ElevatorButton : MonoBehaviour {
 			
 			if(!manager.GetButton()){
 				
-				transform.renderer.material.color = Color.green;
 				transform.audio.PlayOneShot(audio);
 				manager.SetButton(true,transform.name);
 				
 			}
 			
 		}
-		
-	}
-	
-	public void DisableButton(){
-		
-		transform.renderer.material.color = Color.red;
 		
 	}
 }

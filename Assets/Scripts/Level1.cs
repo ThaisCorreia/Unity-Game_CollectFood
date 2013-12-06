@@ -6,8 +6,8 @@ public class Level1 : GameManager {
 	void Start () {
 	
 		foodQty = 10;
-		seconds = 0f;
-		minutes = 4f;
+		seconds = 30f;
+		minutes = 3f;
 		
 		base.Start();
 		

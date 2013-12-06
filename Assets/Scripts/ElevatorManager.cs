@@ -25,6 +25,7 @@ public class ElevatorManager : MonoBehaviour {
 	public Transform doors2;
 	public Transform button1;
 	public Transform button2;
+	public Transform button3;
 	
 	float timer;
 	float timerLimit;
@@ -40,6 +41,7 @@ public class ElevatorManager : MonoBehaviour {
 		doors2 = transform.Find("Doors2");
 		button1 = transform.Find("Button1");
 		button2 = transform.Find("Button2");
+		button3 = body.Find("Button3");
 		
 		floor1Location = new Vector3(body.position.x, 0.2787772f, body.position.z);
 		floor2Location = new Vector3(body.position.x, 2.789611f, body.position.z);
@@ -77,7 +79,11 @@ public class ElevatorManager : MonoBehaviour {
 			}
 			else if(exit){
 				if(button == button1.name) doors.animation.CrossFade("CloseElevator");
-				else doors2.animation.CrossFade("CloseElevator");
+				else if(button == button2.name) doors2.animation.CrossFade("CloseElevator");
+				else{
+					if(body.position.y == floor2Location.y) doors2.animation.CrossFade("CloseElevator");
+					else doors.animation.CrossFade("CloseElevator");
+				}
 				timerLimit = 1f;
 				timer = timerLimit;
 				exit = false;
@@ -115,7 +121,11 @@ public class ElevatorManager : MonoBehaviour {
 		
 		if(!doorIsOpen){
 			if(button == button1.name) doors.animation.CrossFade("OpenElevator");
-			else doors2.animation.CrossFade("OpenElevator");
+			else if(button == button2.name) doors2.animation.CrossFade("OpenElevator");
+			else{
+				if(body.position.y == floor2Location.y) doors2.animation.CrossFade("OpenElevator");
+				else doors.animation.CrossFade("OpenElevator");
+			}
 			timer = timerLimit;
 			doorIsOpen = true;
 			exit = true;
@@ -124,8 +134,6 @@ public class ElevatorManager : MonoBehaviour {
 		else{
 			openDoor = false;
 			pressedButton = false;
-			if(button == button1.name) button1.GetComponent<ElevatorButton>().DisableButton();
-			else button2.GetComponent<ElevatorButton>().DisableButton();
 		}
 		
 		timerLimit = 2f;
@@ -214,18 +222,26 @@ public class ElevatorManager : MonoBehaviour {
 				pressedButton = pressed;
 				button = bt;
 				
-				if(button == button1.name) targetPosition = floor2Location.y;
-				else targetPosition = floor1Location.y;
-				
-				if(targetPosition == VerifyLocation()){
-					moveElevator = true;
-					going = true;
-				}
-				else if(VerifyLocation() != 0f){
+				if(button == button3.name){
+					
 					openDoor = true; 
-					moveElevator = true;
-					if(button == button1.name) targetPosition = floor1Location.y;
-					else targetPosition = floor2Location.y;
+					moveElevator = false;
+					
+				}
+				else{
+					if(button == button1.name) targetPosition = floor2Location.y;
+					else targetPosition = floor1Location.y;
+					
+					if(targetPosition == VerifyLocation()){
+						moveElevator = true;
+						going = true;
+					}
+					else if(VerifyLocation() != 0f){
+						openDoor = true; 
+						moveElevator = true;
+						if(button == button1.name) targetPosition = floor1Location.y;
+						else targetPosition = floor2Location.y;
+					}
 				}
 					
 			}
